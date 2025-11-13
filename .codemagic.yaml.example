@@ -1,0 +1,73 @@
+# Example Codemagic Configuration
+# Copy this file to codemagic.yaml and configure with your credentials
+
+workflows:
+  ios-workflow:
+    name: Moon Reader iOS
+    max_build_duration: 120
+    instance_type: mac_mini_m1
+    environment:
+      groups:
+        # Step 1: Add App Store Connect API key
+        # Go to Codemagic → Teams → Integrations → App Store Connect
+        # Add your API key credentials
+        - app_store_connect_api_key_credentials
+        
+        # Step 2: Add code signing certificates
+        # Go to Codemagic → Teams → Code signing identities
+        # Upload your certificates and provisioning profiles
+        - certificate_credentials
+        - provisioning_profile_credentials
+      vars:
+        XCODE_WORKSPACE: "MoonReader.xcodeproj"
+        XCODE_SCHEME: "MoonReader"
+        APP_ID: "com.moonreader.ios"
+        BUNDLE_ID: "com.moonreader.ios"
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - name: Install dependencies
+        script: |
+          echo "Installing dependencies..."
+          # Add any dependency installation here
+          # pod install
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles
+      - name: Build ipa for distribution
+        script: |
+          xcodebuild \
+            -project "$XCODE_WORKSPACE" \
+            -scheme "$XCODE_SCHEME" \
+            -sdk iphoneos \
+            -configuration Release \
+            -archivePath build/Runner.xcarchive \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            archive | xcpretty
+      - name: Export IPA
+        script: |
+          xcodebuild \
+            -exportArchive \
+            -archivePath "build/Runner.xcarchive" \
+            -exportOptionsPlist export_options.plist \
+            -exportPath "build/ios/ipa"
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - build/ios/ipa/*.dSYM.zip
+    publishing:
+      email:
+        recipients:
+          - your-email@example.com  # Change to your email
+        notify:
+          success: true
+          failure: true
+      # Uncomment to publish to App Store Connect
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        beta_groups:
+          - "Internal Testers"
+          - "External Testers"
+

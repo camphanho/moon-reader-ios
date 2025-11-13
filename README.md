@@ -233,6 +233,7 @@ Xem `BUILD_FOR_DEVICE.md` để biết cách build và cài app lên iPhone.
 - `TESTING_GUIDE.md` - Hướng dẫn test chi tiết
 - `BUILD_FOR_DEVICE.md` - Build và cài lên iPhone
 - `BUILD_QUICK.md` - Quick build guide
+- `CODEMAGIC_SETUP.md` - CI/CD với Codemagic
 - `QUICK_START.md` - Quick start guide
 - `FEATURES_COMPLETE.md` - Danh sách tính năng
 - `PROJECT_FINAL.md` - Tổng kết project
