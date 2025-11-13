@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Method: app-store, ad-hoc, enterprise, or development -->
+    <key>method</key>
+    <string>app-store</string>
+    
+    <!-- For App Store distribution -->
+    <key>uploadBitcode</key>
+    <false/>
+    <key>uploadSymbols</key>
+    <true/>
+    <key>compileBitcode</key>
+    <false/>
+    
+    <!-- Signing -->
+    <key>signingStyle</key>
+    <string>automatic</string>
+    
+    <!-- Team ID (optional, will use from signing) -->
+    <!-- <key>teamID</key> -->
+    <!-- <string>YOUR_TEAM_ID</string> -->
+    
+    <!-- Provisioning profiles (optional, will use automatic) -->
+    <!-- <key>provisioningProfiles</key> -->
+    <!-- <dict> -->
+    <!--     <key>com.moonreader.ios</key> -->
+    <!--     <string>Profile Name</string> -->
+    <!-- </dict> -->
+</dict>
+</plist>
+
