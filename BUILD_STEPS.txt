@@ -1,0 +1,28 @@
+📱 BUILD APP CHO IPHONE - CÁC BƯỚC
+
+1. KẾT NỐI IPHONE
+   - Cắm USB vào iPhone và Mac
+   - Unlock iPhone
+   - Trust computer (nếu lần đầu)
+
+2. MỞ XCODE
+   cd /home/camph/Documents/MoonReader/NewApp
+   open MoonReader.xcodeproj
+
+3. CẤU HÌNH SIGNING
+   - Click project → Target MoonReader
+   - Tab "Signing & Capabilities"
+   - ✅ Automatically manage signing
+   - Chọn Team (Apple ID)
+
+4. CHỌN IPHONE
+   - Device selector → Chọn iPhone của bạn
+
+5. BUILD & RUN
+   Command + R
+
+6. TRUST DEVELOPER (Lần đầu)
+   - Settings → General → VPN & Device Management
+   - Tap developer certificate → Trust
+
+Xem BUILD_FOR_DEVICE.md để biết chi tiết!
