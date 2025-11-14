@@ -47,7 +47,7 @@ workflows:
             -archivePath build/MoonReader.xcarchive \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
-            archive | xcpretty
+            archive 2>&1 | tee build.log || (cat build.log && exit 1)
       - name: Export IPA
         script: |
           xcodebuild \

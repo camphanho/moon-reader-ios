@@ -33,7 +33,6 @@
 		A0FFFFF8 = {
 			isa = PBXGroup;
 			children = (
-				A0FFFFFF /* MoonReader.app */,
 				A0FFFFF9 /* MoonReader */,
 				A0FFFFFA /* Products */,
 			);
