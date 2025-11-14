@@ -177,7 +177,7 @@
 				0100018A /* ViewModels */,
 				0100018B /* Views */,
 );
-			path = MoonReader;
+			
 			sourceTree = "<group>";
 		};
 		A0FFFFFA /* Products */ = {

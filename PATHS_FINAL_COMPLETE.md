@@ -1,49 +1,48 @@
-# ✅ Paths đã được sửa hoàn toàn - Final Fix
+# ✅ Paths đã được sửa hoàn toàn - Final Complete Fix
 
 ## Vấn đề cuối cùng
 
-Build fail với: `/Users/builder/clone/Views/Statistics/ReadingStatisticsView.swift` (thiếu MoonReader/)
+Xcode đang tìm files ở `/Users/builder/clone/MoonReader/MoonReader/...` (duplicate MoonReader)
 
 ## Nguyên nhân
 
-Views group có `path = "Views"` nhưng nó là child của MoonReader group có `path = MoonReader`:
-- MoonReader group: `path = MoonReader` → `/Users/builder/clone/MoonReader`
-- Views group: `path = "Views"` → Xcode resolve thành `/Users/builder/clone/Views` ❌
-- File path: `Views/Statistics/...` → `/Users/builder/clone/Views/...` ❌
+File paths là absolute (`MoonReader/Core/...`) NHƯNG parent group cũng có `path = MoonReader`:
+- File path: `MoonReader/Core/...` (absolute)
+- Parent group: `path = MoonReader`
+- Xcode resolve: `working_dir + group_path + file_path`
+- Result: `/Users/builder/clone/MoonReader/MoonReader/Core/...` ❌
 
 ## Giải pháp cuối cùng
 
-**Xóa paths từ tất cả child groups của MoonReader:**
-- ❌ Views group có `path = "Views"`
-- ✅ Views group không có path (chỉ là organizational structure)
+**Xóa path từ MoonReader group vì file paths đã là absolute:**
+- ❌ MoonReader group có `path = MoonReader`
+- ✅ MoonReader group không có path (chỉ organizational)
 
 **Xcode sẽ resolve đúng:**
 - Working directory: `/Users/builder/clone`
-- MoonReader group: `path = MoonReader`
-- File path: `Views/Statistics/ReadingStatisticsView.swift` (relative từ MoonReader)
-- **Final path**: `/Users/builder/clone/MoonReader/Views/Statistics/ReadingStatisticsView.swift` ✅
+- File path: `MoonReader/Core/Database/BookDatabase.swift` (absolute)
+- **Final path**: `/Users/builder/clone/MoonReader/Core/Database/BookDatabase.swift` ✅
 
 ## Đã sửa
 
-1. ✅ Removed paths từ tất cả top-level child groups (Core, Models, Views, ViewModels, Utilities)
-2. ✅ Removed paths từ sub-groups (Common, Library, Reader, Settings, Statistics, etc.)
-3. ✅ File paths vẫn là relative từ MoonReader group: `Views/...`, `Core/...`, etc.
-4. ✅ MoonReader group vẫn có `path = MoonReader`
+1. ✅ File paths: Absolute từ project root (`MoonReader/Core/...`, `MoonReader/Views/...`, etc.)
+2. ✅ MoonReader group: Removed path (không có path nữa)
+3. ✅ Child groups: No paths (chỉ organizational)
+4. ✅ Root-level files: Filename only (như `MoonReaderApp.swift`)
 
 ## Cấu trúc cuối cùng
 
 ```
-MoonReader group (path = MoonReader)
+MoonReader group (no path, chỉ organizational)
 ├── Core group (no path)
 │   ├── Database group (no path)
-│   │   └── BookDatabase.swift (path = "Core/Database/BookDatabase.swift")
+│   │   └── BookDatabase.swift (path = "MoonReader/Core/Database/BookDatabase.swift")
 │   └── ...
 ├── Models group (no path)
-│   └── Book.swift (path = "Models/Book.swift")
+│   └── Book.swift (path = "MoonReader/Models/Book.swift")
 ├── Views group (no path)
-│   ├── Statistics group (no path)
-│   │   └── ReadingStatisticsView.swift (path = "Views/Statistics/ReadingStatisticsView.swift")
-│   └── ...
+│   └── Statistics group (no path)
+│       └── ReadingStatisticsView.swift (path = "MoonReader/Views/Statistics/ReadingStatisticsView.swift")
 └── ...
 ```
 
@@ -52,7 +51,7 @@ MoonReader group (path = MoonReader)
 1. **Commit changes:**
 ```bash
 git add MoonReader.xcodeproj/project.pbxproj
-git commit -m "Fix: Remove paths from all child groups to fix path resolution"
+git commit -m "Fix: Remove path from MoonReader group to fix duplicate path resolution with absolute file paths"
 git push
 ```
 
@@ -60,8 +59,6 @@ git push
 
 ## Lưu ý
 
-- **Parent group**: `path = MoonReader` (absolute từ project root)
-- **Child groups**: No paths (chỉ organizational)
-- **File references**: Relative paths từ MoonReader (`Core/...`, `Views/...`, etc.)
-- **Xcode resolution**: `working_dir + parent_path + file_path`
-
+- **File paths**: Absolute từ project root (`MoonReader/...`)
+- **Groups**: No paths (chỉ organizational structure)
+- **Xcode resolution**: `working_dir + file_path` = `/Users/builder/clone/MoonReader/...`
