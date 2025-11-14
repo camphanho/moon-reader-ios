@@ -204,7 +204,6 @@ struct EditBookmarkView: View {
     }
     
     private func saveBookmark() {
-        var updatedBookmark = bookmark
         // Note: Bookmark is struct, need to create new one
         let newBookmark = Bookmark(
             id: bookmark.id,

@@ -75,7 +75,7 @@ struct PDFReaderView: View {
     }
     
     private func goToPreviousPage() {
-        guard let document = pdfDocument, currentPage > 0 else { return }
+        guard pdfDocument != nil, currentPage > 0 else { return }
         currentPage -= 1
         saveReadingPosition()
     }
@@ -186,15 +186,7 @@ struct PDFAnnotationsView: View {
             List {
                 if let document = document {
                     ForEach(0..<document.pageCount, id: \.self) { index in
-                        if let page = document.page(at: index),
-                           let annotations = page.annotations as? [PDFAnnotation],
-                           !annotations.isEmpty {
-                            Section(header: Text("Trang \(index + 1)")) {
-                                ForEach(annotations, id: \.annotationKeyValues) { annotation in
-                                    Text(annotation.contents ?? "Annotation")
-                                }
-                            }
-                        }
+                        pageSection(document: document, index: index)
                     }
                 }
             }
@@ -205,6 +197,19 @@ struct PDFAnnotationsView: View {
                     Button("Đóng") {
                         dismiss()
                     }
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func pageSection(document: PDFDocument, index: Int) -> some View {
+        if let page = document.page(at: index),
+           let annotations = page.annotations as? [PDFAnnotation],
+           !annotations.isEmpty {
+            Section(header: Text("Trang \(index + 1)")) {
+                ForEach(annotations, id: \.annotationKeyValues) { annotation in
+                    Text(annotation.contents ?? "Annotation")
                 }
             }
         }

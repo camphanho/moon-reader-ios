@@ -23,7 +23,7 @@ struct ReadingView: View {
             }
         }
         .sheet(isPresented: $showingSettings) {
-            if let book = currentBook {
+            if currentBook != nil {
                 // Settings for reading view - will be handled by BookReaderView
             }
         }

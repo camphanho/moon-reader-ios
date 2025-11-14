@@ -83,7 +83,7 @@ class ReadingTracker: ObservableObject {
     }
     
     private func loadTodayStats() {
-        let today = Calendar.current.startOfDay(for: Date())
+        _ = Calendar.current.startOfDay(for: Date())
         // Load from database
         // Implementation sẽ load từ BookDatabase
     }

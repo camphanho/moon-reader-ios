@@ -50,7 +50,7 @@ class MDParser: BaseBookParser {
                 // Start new chapter
                 let title = String(line.dropFirst(2)).trimmingCharacters(in: .whitespaces)
                 currentChapter = (title: title, content: [])
-            } else if let chapter = currentChapter {
+            } else if currentChapter != nil {
                 currentChapter?.content.append(line)
             }
         }

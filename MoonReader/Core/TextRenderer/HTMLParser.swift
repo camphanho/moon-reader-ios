@@ -16,7 +16,7 @@ class HTMLParser {
             return NSAttributedString(string: html)
         }
         
-        var options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
             .documentType: NSAttributedString.DocumentType.html,
             .characterEncoding: String.Encoding.utf8.rawValue
         ]
