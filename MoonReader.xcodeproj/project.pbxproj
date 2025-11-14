@@ -79,8 +79,8 @@
 /* Begin PBXFileReference section */
 		A0FFFFFF /* MoonReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoonReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1000000 /* MoonReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonReader/MoonReaderApp.swift; sourceTree = "<group>"; };
-		A1000003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A1000005 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A1000003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "MoonReader/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
+		A1000005 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "MoonReader/Preview Content/Preview Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 
 		01000100 /* AutoScrollManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoonReader/Core/AutoScroll/AutoScrollManager.swift"; sourceTree = "<group>"; };
 		01000102 /* BookContentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoonReader/Core/BookContentManager.swift"; sourceTree = "<group>"; };
@@ -193,7 +193,7 @@
 			children = (
 				A1000005 /* Preview Assets.xcassets */,
 			);
-			path = "Preview Content";
+			path = "MoonReader/Preview Content";
 			sourceTree = "<group>";
 		};
 
