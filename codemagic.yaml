@@ -1,26 +1,28 @@
-# Codemagic CI/CD Configuration for Moon Reader iOS
-# Documentation: https://docs.codemagic.io/yaml/yaml-getting-started/
-
 workflows:
   ios-local-build:
-    name: Moon Reader iOS Local
+    name: MoonReader iOS Local Build
     max_build_duration: 60
     instance_type: mac_mini_m1
     environment:
       vars:
-        XCODE_WORKSPACE: "MoonReader.xcodeproj"
+        XCODE_PROJECT: "MoonReader.xcodeproj"
         XCODE_SCHEME: "MoonReader"
+        BUNDLE_ID: "com.moonreader.ios"
       xcode: latest
       cocoapods: default
     scripts:
       - name: Install dependencies
         script: |
           echo "Installing dependencies..."
-          # pod install # nếu dùng CocoaPods
-      - name: Build IPA (unsigned)
+          # nếu dùng CocoaPods
+          pod install --repo-update || true
+      - name: Create build directory
+        script: |
+          mkdir -p build
+      - name: Archive project
         script: |
           xcodebuild \
-            -project "$XCODE_WORKSPACE" \
+            -project "$XCODE_PROJECT" \
             -scheme "$XCODE_SCHEME" \
             -sdk iphoneos \
             -configuration Release \
@@ -32,10 +34,17 @@ workflows:
         script: |
           xcodebuild \
             -exportArchive \
-            -archivePath "build/MoonReader.xcarchive" \
+            -archivePath build/MoonReader.xcarchive \
             -exportOptionsPlist export_options.plist \
-            -exportPath "build/ios/ipa"
+            -exportPath build/ios/ipa | xcpretty
     artifacts:
       - build/ios/ipa/*.ipa
-
+      - build/ios/ipa/*.dSYM.zip
+    publishing:
+      email:
+        recipients:
+          - camph.dev.96@gmail.com
+        notify:
+          success: true
+          failure: true
 
