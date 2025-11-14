@@ -20,7 +20,7 @@ class FB2Parser: BaseBookParser {
         // Simple XML parsing - in production use XMLParser
         var title = "Unknown"
         var author = ""
-        var description = ""
+        let description = ""
         
         // Extract title
         if let titleRange = xmlString.range(of: "<book-title[^>]*>([^<]+)</book-title>", options: .regularExpression) {

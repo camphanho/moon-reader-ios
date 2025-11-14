@@ -37,7 +37,7 @@ class OPDSClient: ObservableObject {
     private let session = URLSession.shared
     
     func fetchFeed(from url: URL) async throws -> OPDSFeed {
-        let (data, _) = try await session.data(from: url)
+        let (_, _) = try await session.data(from: url)
         
         // Parse OPDS XML/Atom feed
         // Implementation sẽ parse XML/Atom feed

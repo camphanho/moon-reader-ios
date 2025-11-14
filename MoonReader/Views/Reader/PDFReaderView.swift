@@ -204,12 +204,13 @@ struct PDFAnnotationsView: View {
     
     @ViewBuilder
     private func pageSection(document: PDFDocument, index: Int) -> some View {
-        if let page = document.page(at: index),
-           let annotations = page.annotations as? [PDFAnnotation],
-           !annotations.isEmpty {
-            Section(header: Text("Trang \(index + 1)")) {
-                ForEach(annotations, id: \.annotationKeyValues) { annotation in
-                    Text(annotation.contents ?? "Annotation")
+        if let page = document.page(at: index) {
+            let annotations = page.annotations
+            if !annotations.isEmpty {
+                Section(header: Text("Trang \(index + 1)")) {
+                    ForEach(annotations.indices, id: \.self) { idx in
+                        Text(annotations[idx].contents ?? "Annotation")
+                    }
                 }
             }
         }

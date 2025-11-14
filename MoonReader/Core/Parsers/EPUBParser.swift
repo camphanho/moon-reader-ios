@@ -87,7 +87,7 @@ class EPUBParser: BaseBookParser {
         var description = ""
         var publisher: String?
         var isbn: String?
-        var publishDate: Date?
+        let publishDate: Date? = nil
         var language: String?
         var coverImage: Data?
         
