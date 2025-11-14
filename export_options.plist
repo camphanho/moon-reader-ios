@@ -4,19 +4,17 @@
 <dict>
     <!-- Method: app-store, ad-hoc, enterprise, or development -->
     <key>method</key>
-    <string>app-store</string>
+    <string>development</string>
     
     <!-- For App Store distribution -->
-    <key>uploadBitcode</key>
-    <false/>
     <key>uploadSymbols</key>
-    <true/>
-    <key>compileBitcode</key>
+    <false/>
+    <key>uploadBitcode</key>
     <false/>
     
     <!-- Signing -->
     <key>signingStyle</key>
-    <string>automatic</string>
+    <string>manual</string>
     
     <!-- Team ID (optional, will use from signing) -->
     <!-- <key>teamID</key> -->

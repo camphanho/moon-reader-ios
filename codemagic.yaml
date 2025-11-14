@@ -2,34 +2,22 @@
 # Documentation: https://docs.codemagic.io/yaml/yaml-getting-started/
 
 workflows:
-  ios-workflow:
-    name: Moon Reader iOS
-    max_build_duration: 120
+  ios-local-build:
+    name: Moon Reader iOS Local
+    max_build_duration: 60
     instance_type: mac_mini_m1
     environment:
-      groups:
-        # Add your App Store Connect API key credentials
-        # - app_store_connect_api_key_credentials
-        # Add your code signing certificates
-        # - certificate_credentials
-        # - provisioning_profile_credentials
       vars:
         XCODE_WORKSPACE: "MoonReader.xcodeproj"
         XCODE_SCHEME: "MoonReader"
-        APP_ID: "com.moonreader.ios"
-        BUNDLE_ID: "com.moonreader.ios"
       xcode: latest
       cocoapods: default
     scripts:
       - name: Install dependencies
         script: |
           echo "Installing dependencies..."
-          # Install CocoaPods if needed
-          # pod install
-      - name: Set up code signing settings on Xcode project
-        script: |
-          xcode-project use-profiles
-      - name: Build ipa for distribution
+          # pod install # nếu dùng CocoaPods
+      - name: Build IPA (unsigned)
         script: |
           xcodebuild \
             -project "$XCODE_WORKSPACE" \
@@ -37,7 +25,6 @@ workflows:
             -sdk iphoneos \
             -configuration Release \
             -archivePath build/MoonReader.xcarchive \
-            CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
             archive | xcpretty
@@ -50,65 +37,5 @@ workflows:
             -exportPath "build/ios/ipa"
     artifacts:
       - build/ios/ipa/*.ipa
-      - build/ios/ipa/*.dSYM.zip
-    publishing:
-      email:
-        recipients:
-          - camph.dev.96@gmail.com
-        notify:
-          success: true
-          failure: true
-      # Uncomment to publish to App Store Connect
-      # app_store_connect:
-      #   auth: integration
-      #   submit_to_testflight: true
-      #   beta_groups:
-      #     - group name 1
-      #     - group name 2
 
-  # iOS Simulator Build (for testing)
-  ios-simulator-workflow:
-    name: Moon Reader iOS - Simulator
-    max_build_duration: 60
-    instance_type: mac_mini_m1
-    environment:
-      groups:
-        # Add your code signing certificates if needed
-        # - certificate_credentials
-      vars:
-        XCODE_WORKSPACE: "MoonReader.xcodeproj"
-        XCODE_SCHEME: "MoonReader"
-      xcode: latest
-      cocoapods: default
-    scripts:
-      - name: Install dependencies
-        script: |
-          echo "Installing dependencies..."
-      - name: Build for Simulator
-        script: |
-          xcodebuild \
-            -project "$XCODE_WORKSPACE" \
-            -scheme "$XCODE_SCHEME" \
-            -sdk iphonesimulator \
-            -configuration Debug \
-            -derivedDataPath ./build \
-            build | xcpretty
-      - name: Run tests (if available)
-        script: |
-          # Uncomment when you have tests
-          # xcodebuild \
-          #   -project "$XCODE_WORKSPACE" \
-          #   -scheme "$XCODE_SCHEME" \
-          #   -sdk iphonesimulator \
-          #   -destination 'platform=iOS Simulator,name=iPhone 15 Pro' \
-          #   test | xcpretty
-    artifacts:
-      - build/**/*.app
-    publishing:
-      email:
-        recipients:
-          - your-email@example.com
-        notify:
-          success: true
-          failure: false
 
