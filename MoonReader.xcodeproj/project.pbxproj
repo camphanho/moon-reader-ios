@@ -210,7 +210,6 @@
 			children = (
 					01000100 /* AutoScrollManager.swift */,
 			);
-			path = "AutoScroll";
 			sourceTree = "<group>";
 		};
 		01000180 /* CloudSync */ = {
@@ -218,7 +217,6 @@
 			children = (
 					01000106 /* iCloudSync.swift */,
 			);
-			path = "CloudSync";
 			sourceTree = "<group>";
 		};
 		01000181 /* Database */ = {
@@ -226,7 +224,6 @@
 			children = (
 					01000108 /* BookDatabase.swift */,
 			);
-			path = "Database";
 			sourceTree = "<group>";
 		};
 		01000182 /* OPDS */ = {
@@ -234,7 +231,6 @@
 			children = (
 					0100010A /* OPDSClient.swift */,
 			);
-			path = "OPDS";
 			sourceTree = "<group>";
 		};
 		01000183 /* Parsers */ = {
@@ -254,7 +250,6 @@
 					01000122 /* RTFParser.swift */,
 					01000124 /* TXTParser.swift */,
 			);
-			path = "Parsers";
 			sourceTree = "<group>";
 		};
 		01000184 /* Search */ = {
@@ -262,7 +257,6 @@
 			children = (
 					01000126 /* BookSearchEngine.swift */,
 			);
-			path = "Search";
 			sourceTree = "<group>";
 		};
 		01000185 /* Statistics */ = {
@@ -270,7 +264,6 @@
 			children = (
 					01000128 /* ReadingTracker.swift */,
 			);
-			path = "Statistics";
 			sourceTree = "<group>";
 		};
 		01000186 /* TTS */ = {
@@ -278,7 +271,6 @@
 			children = (
 					0100012A /* TTSService.swift */,
 			);
-			path = "TTS";
 			sourceTree = "<group>";
 		};
 		01000187 /* TextRenderer */ = {
@@ -290,7 +282,6 @@
 					01000132 /* PageCalculator.swift */,
 					01000134 /* TextSelectionHandler.swift */,
 			);
-			path = "TextRenderer";
 			sourceTree = "<group>";
 		};
 		01000188 /* Models */ = {
@@ -337,7 +328,6 @@
 			children = (
 					01000152 /* LoadingView.swift */,
 			);
-			path = "Common";
 			sourceTree = "<group>";
 		};
 		0100018D /* Library */ = {
@@ -349,7 +339,6 @@
 					0100015A /* ImportBookButton.swift */,
 					0100015C /* OPDSCatalogView.swift */,
 			);
-			path = "Library";
 			sourceTree = "<group>";
 		};
 		0100018E /* Reader */ = {
@@ -369,7 +358,6 @@
 					01000174 /* SearchView.swift */,
 					01000176 /* TTSControlView.swift */,
 			);
-			path = "Reader";
 			sourceTree = "<group>";
 		};
 		0100018F /* Settings */ = {
@@ -378,7 +366,6 @@
 					01000178 /* CloudSyncView.swift */,
 					0100017A /* SettingsView.swift */,
 			);
-			path = "Settings";
 			sourceTree = "<group>";
 		};
 		01000190 /* Statistics */ = {
@@ -386,7 +373,6 @@
 			children = (
 					0100017C /* ReadingStatisticsView.swift */,
 			);
-			path = "Statistics";
 			sourceTree = "<group>";
 		};
 		/* End PBXGroup section */
