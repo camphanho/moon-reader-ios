@@ -7,6 +7,24 @@
 
 import Foundation
 import SwiftUI
+import UIKit
+
+// Custom TextAlignment enum with justified support
+enum TextAlignment: String, CaseIterable {
+    case leading
+    case center
+    case trailing
+    case justified
+    
+    var nsTextAlignment: NSTextAlignment {
+        switch self {
+        case .leading: return .left
+        case .trailing: return .right
+        case .center: return .center
+        case .justified: return .justified
+        }
+    }
+}
 
 class ReaderViewModel: ObservableObject {
     @Published var currentBook: Book?
@@ -64,7 +82,7 @@ class ReaderViewModel: ObservableObject {
         currentChapterIndex = index
         
         // Check cache first
-        let cacheKey = "\(book?.id.uuidString ?? "")_\(index)_\(readerSettings.fontSize)_\(readerSettings.margin)"
+        let cacheKey = "\(currentBook?.id.uuidString ?? "")_\(index)_\(readerSettings.fontSize)_\(readerSettings.margin)"
         if let cachedPages = PerformanceOptimizer.shared.getCachedPages(for: cacheKey) {
             pages = cachedPages
         } else {
@@ -230,14 +248,4 @@ class ReaderViewModel: ObservableObject {
     }
 }
 
-extension TextAlignment {
-    var nsTextAlignment: NSTextAlignment {
-        switch self {
-        case .leading: return .left
-        case .trailing: return .right
-        case .center: return .center
-        case .justified: return .justified
-        }
-    }
-}
 

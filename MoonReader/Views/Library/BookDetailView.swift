@@ -42,8 +42,8 @@ struct BookDetailView: View {
                     }
                     
                     // Description
-                    if let description = book.description, !description.isEmpty {
-                        Text(description)
+                    if !book.description.isEmpty {
+                        Text(book.description)
                             .font(.body)
                             .padding(.horizontal)
                     }

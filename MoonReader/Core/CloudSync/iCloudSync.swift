@@ -110,7 +110,7 @@ class iCloudSync: ObservableObject {
                 try FileManager.default.copyItem(at: fileURL, to: localURL)
                 
                 // Import book
-                if let parser = BookParserFactory.parser(for: fileURL) {
+                if let parser = try? BookParserFactory.createParser(for: fileURL) {
                     let parsedBook = try parser.parse(fileURL: fileURL)
                     // Add to database
                     // Implementation sẽ thêm vào BookDatabase

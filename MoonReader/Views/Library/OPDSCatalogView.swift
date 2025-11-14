@@ -230,7 +230,7 @@ struct OPDSBookRow: View {
             do {
                 let fileURL = try await OPDSClient.shared.downloadBook(entry)
                 // Import book
-                await BookManager.shared.importBooks(from: [fileURL])
+                try await BookManager.shared.importBooks(from: [fileURL])
                 isDownloading = false
             } catch {
                 isDownloading = false

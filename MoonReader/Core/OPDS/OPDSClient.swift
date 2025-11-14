@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct OPDSFeed {
     let title: String
@@ -30,7 +31,7 @@ struct OPDSLink {
     let type: String?
 }
 
-class OPDSClient {
+class OPDSClient: ObservableObject {
     static let shared = OPDSClient()
     
     private let session = URLSession.shared

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CloudSyncView: View {
-    @StateObject private var iCloudSync = iCloudSync.shared
+    @StateObject private var cloudSync = iCloudSync.shared
     @State private var showingSyncAlert = false
     @State private var syncError: String?
     
@@ -25,7 +25,7 @@ struct CloudSyncView: View {
                         Text("iCloud Sync")
                             .font(.headline)
                         
-                        if iCloudSync.checkiCloudAvailability() {
+                        if cloudSync.checkiCloudAvailability() {
                             Text("Đã kết nối")
                                 .font(.caption)
                                 .foregroundColor(.green)
@@ -38,7 +38,7 @@ struct CloudSyncView: View {
                     
                     Spacer()
                     
-                    if iCloudSync.isSyncing {
+                    if cloudSync.isSyncing {
                         ProgressView()
                     } else {
                         Button("Đồng bộ") {
@@ -46,16 +46,16 @@ struct CloudSyncView: View {
                                 await syncToiCloud()
                             }
                         }
-                        .disabled(!iCloudSync.checkiCloudAvailability())
+                        .disabled(!cloudSync.checkiCloudAvailability())
                     }
                 }
                 
-                if iCloudSync.isSyncing {
-                    ProgressView(value: iCloudSync.syncProgress)
+                if cloudSync.isSyncing {
+                    ProgressView(value: cloudSync.syncProgress)
                         .padding(.vertical, 8)
                 }
                 
-                if let lastSync = iCloudSync.lastSyncDate {
+                if let lastSync = cloudSync.lastSyncDate {
                     Text("Lần đồng bộ cuối: \(formatDate(lastSync))")
                         .font(.caption)
                         .foregroundColor(.secondary)
@@ -123,7 +123,7 @@ struct CloudSyncView: View {
     
     private func syncToiCloud() async {
         do {
-            try await iCloudSync.syncBooks()
+            try await cloudSync.syncBooks()
         } catch {
             syncError = error.localizedDescription
         }

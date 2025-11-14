@@ -16,21 +16,21 @@ class HTMLParser {
             return NSAttributedString(string: html)
         }
         
-        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+        var options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
             .documentType: NSAttributedString.DocumentType.html,
             .characterEncoding: String.Encoding.utf8.rawValue
         ]
         
+        var documentAttributes: [NSAttributedString.DocumentAttributeKey: Any] = [:]
         if let baseURL = baseURL {
-            var mutableOptions = options
-            mutableOptions[.baseURL] = baseURL
+            documentAttributes[.baseURL] = baseURL
         }
         
         do {
             let attributedString = try NSAttributedString(
                 data: data,
                 options: options,
-                documentAttributes: nil
+                documentAttributes: documentAttributes.isEmpty ? nil : documentAttributes
             )
             return attributedString
         } catch {

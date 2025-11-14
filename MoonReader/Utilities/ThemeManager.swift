@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 class ThemeManager: ObservableObject {
     static let shared = ThemeManager()
@@ -81,5 +82,12 @@ struct AppTheme {
         textColor: Color(red: 0.3, green: 0.25, blue: 0.2),
         accentColor: .brown
     )
+}
+
+// Extension to convert SwiftUI Color to UIKit UIColor
+extension Color {
+    var uiColor: UIColor {
+        return UIColor(self)
+    }
 }
 

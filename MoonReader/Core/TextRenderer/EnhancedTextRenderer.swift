@@ -112,11 +112,3 @@ struct EnhancedTextView: UIViewRepresentable {
     }
 }
 
-extension UITextView {
-    func nsRange(from textRange: UITextRange) -> NSRange {
-        let start = offset(from: beginningOfDocument, to: textRange.start)
-        let end = offset(from: beginningOfDocument, to: textRange.end)
-        return NSRange(location: start, length: end - start)
-    }
-}
-
