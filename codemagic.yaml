@@ -10,7 +10,7 @@ workflows:
         BUNDLE_ID: "com.moonreader.ios"
         # Set your Apple Developer Team ID here
         # Find it at: https://developer.apple.com/account -> Membership
-        APPLE_TEAM_ID: ""
+        APPLE_TEAM_ID: "43AQ936H96"
       xcode: latest
       cocoapods: default
     scripts:
