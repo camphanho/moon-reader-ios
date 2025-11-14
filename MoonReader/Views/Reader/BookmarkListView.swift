@@ -63,11 +63,11 @@ struct BookmarkListView: View {
     }
     
     private func loadBookmarks() {
-        bookmarks = bookDatabase.bookmarks.filter { $0.bookId == book.id }
+        bookmarks = BookDatabase.shared.bookmarks.filter { $0.bookId == book.id }
     }
     
     private func deleteBookmark(_ bookmark: Bookmark) {
-        bookDatabase.deleteBookmark(bookmark)
+        BookDatabase.shared.deleteBookmark(bookmark)
         loadBookmarks()
     }
 }
@@ -221,7 +221,7 @@ struct EditBookmarkView: View {
             isUnderline: bookmark.isUnderline,
             isStrikethrough: bookmark.isStrikethrough
         )
-        bookDatabase.updateBookmark(newBookmark)
+        BookDatabase.shared.updateBookmark(newBookmark)
     }
 }
 

@@ -21,16 +21,15 @@ class HTMLParser {
             .characterEncoding: String.Encoding.utf8.rawValue
         ]
         
-        var documentAttributes: [NSAttributedString.DocumentAttributeKey: Any] = [:]
-        if let baseURL = baseURL {
-            documentAttributes[.baseURL] = baseURL
-        }
+        // Note: baseURL is not directly supported in DocumentAttributeKey
+        // We'll parse without baseURL and handle relative URLs separately if needed
         
         do {
+            var documentAttributes: NSDictionary?
             let attributedString = try NSAttributedString(
                 data: data,
                 options: options,
-                documentAttributes: documentAttributes.isEmpty ? nil : documentAttributes
+                documentAttributes: &documentAttributes
             )
             return attributedString
         } catch {
