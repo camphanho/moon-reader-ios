@@ -20,7 +20,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A0FFFFFE /* Frameworks */ = {
+		A0FFFFFD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -72,9 +72,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1000006 /* Build configuration list for PBXNativeTarget "MoonReader" */;
 			buildPhases = (
-				A0FFFFFB /* Sources */,
-				A0FFFFFE /* Frameworks */,
-				A0FFFFFF /* Resources */,
+				A0FFFFFC /* Sources */,
+				A0FFFFFD /* Frameworks */,
+				A0FFFFF0 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -88,14 +88,14 @@
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		A0FFFFF9 /* Project object */ = {
+		A0FFFFF7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 			};
-			buildConfigurationList = A0FFFFFC /* Build configuration list for PBXProject "MoonReader" */;
+			buildConfigurationList = A100000B /* Build configuration list for PBXProject "MoonReader" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -114,7 +114,7 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A0FFFFFF /* Resources */ = {
+		A0FFFFF0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -126,7 +126,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A0FFFFFB /* Sources */ = {
+		A0FFFFFC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -315,7 +315,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A0FFFFFC /* Build configuration list for PBXProject "MoonReader" */ = {
+		A100000B /* Build configuration list for PBXProject "MoonReader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A1000007 /* Debug */,
@@ -335,6 +335,6 @@
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = A0FFFFF9 /* Project object */;
+	rootObject = A0FFFFF7 /* Project object */;
 }
 
