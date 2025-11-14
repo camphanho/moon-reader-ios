@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList‑1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
   <key>method</key>
-  <string>ad-hoc</string>
+  <string>release-testing</string>
   <key>compileBitcode</key>
   <false/>
   <key>uploadSymbols</key>
@@ -11,16 +11,11 @@
   <key>uploadBitcode</key>
   <false/>
   <key>signingStyle</key>
-  <string>manual</string>
+  <string>automatic</string>
   <key>stripSwiftSymbols</key>
   <true/>
   <key>thinning</key>
   <string>&lt;none&gt;</string>
-  <key>provisioningProfiles</key>
-  <dict>
-    <key>com.moonreader.ios</key>
-    <string>moonreader‑adHoc</string>
-  </dict>
 </dict>
 </plist>
 

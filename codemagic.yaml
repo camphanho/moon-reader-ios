@@ -8,6 +8,9 @@ workflows:
         XCODE_PROJECT: "MoonReader.xcodeproj"
         XCODE_SCHEME: "MoonReader"
         BUNDLE_ID: "com.moonreader.ios"
+        # Set your Apple Developer Team ID here
+        # Find it at: https://developer.apple.com/account -> Membership
+        APPLE_TEAM_ID: ""
       xcode: latest
       cocoapods: default
     scripts:
@@ -37,24 +40,55 @@ workflows:
             echo "⚠️  To fix: Add all Swift files to project in Xcode"
           }
           echo "✅ Validation step completed (warnings are OK)"
+      - name: Set Team ID
+        script: |
+          if [ -n "$APPLE_TEAM_ID" ]; then
+            echo "🔐 Setting Development Team ID: $APPLE_TEAM_ID"
+            # Update project with team ID
+            sed -i.bak "s/DEVELOPMENT_TEAM = \"\";/DEVELOPMENT_TEAM = \"$APPLE_TEAM_ID\";/g" "$XCODE_PROJECT/project.pbxproj"
+            echo "✅ Team ID set successfully"
+          else
+            echo "⚠️  APPLE_TEAM_ID not set - will build without signing"
+          fi
       - name: Archive project
         script: |
-          xcodebuild \
-            -project "$XCODE_PROJECT" \
-            -scheme "$XCODE_SCHEME" \
-            -sdk iphoneos \
-            -configuration Release \
-            -archivePath build/MoonReader.xcarchive \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO \
-            archive 2>&1 | tee build.log || (cat build.log && exit 1)
+          if [ -n "$APPLE_TEAM_ID" ]; then
+            # Build with signing
+            xcodebuild \
+              -project "$XCODE_PROJECT" \
+              -scheme "$XCODE_SCHEME" \
+              -sdk iphoneos \
+              -configuration Release \
+              -archivePath build/MoonReader.xcarchive \
+              DEVELOPMENT_TEAM="$APPLE_TEAM_ID" \
+              archive 2>&1 | tee build.log || (cat build.log && exit 1)
+          else
+            # Build without signing
+            xcodebuild \
+              -project "$XCODE_PROJECT" \
+              -scheme "$XCODE_SCHEME" \
+              -sdk iphoneos \
+              -configuration Release \
+              -archivePath build/MoonReader.xcarchive \
+              CODE_SIGNING_REQUIRED=NO \
+              CODE_SIGNING_ALLOWED=NO \
+              archive 2>&1 | tee build.log || (cat build.log && exit 1)
+          fi
       - name: Export IPA
         script: |
-          xcodebuild \
-            -exportArchive \
-            -archivePath build/MoonReader.xcarchive \
-            -exportOptionsPlist export_options.plist \
-            -exportPath build/ios/ipa | xcpretty
+          if [ -n "$APPLE_TEAM_ID" ]; then
+            echo "📦 Exporting IPA with signing..."
+            xcodebuild \
+              -exportArchive \
+              -archivePath build/MoonReader.xcarchive \
+              -exportOptionsPlist export_options.plist \
+              -exportPath build/ios/ipa \
+              DEVELOPMENT_TEAM="$APPLE_TEAM_ID" | xcpretty
+          else
+            echo "⚠️  Cannot export IPA without signing - skipping export"
+            echo "ℹ️  Archive created at: build/MoonReader.xcarchive"
+            echo "ℹ️  To export IPA: Set APPLE_TEAM_ID in Codemagic environment variables"
+          fi
     artifacts:
       - build/ios/ipa/*.ipa
       - build/ios/ipa/*.dSYM.zip
