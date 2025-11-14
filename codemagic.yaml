@@ -53,13 +53,14 @@ workflows:
       - name: Archive project
         script: |
           if [ -n "$APPLE_TEAM_ID" ]; then
-            # Build with signing
+            # Build with signing (automatic provisioning)
             xcodebuild \
               -project "$XCODE_PROJECT" \
               -scheme "$XCODE_SCHEME" \
               -sdk iphoneos \
               -configuration Release \
               -archivePath build/MoonReader.xcarchive \
+              -allowProvisioningUpdates \
               DEVELOPMENT_TEAM="$APPLE_TEAM_ID" \
               archive 2>&1 | tee build.log || (cat build.log && exit 1)
           else
@@ -83,6 +84,7 @@ workflows:
               -archivePath build/MoonReader.xcarchive \
               -exportOptionsPlist export_options.plist \
               -exportPath build/ios/ipa \
+              -allowProvisioningUpdates \
               DEVELOPMENT_TEAM="$APPLE_TEAM_ID" | xcpretty
           else
             echo "⚠️  Cannot export IPA without signing - skipping export"
